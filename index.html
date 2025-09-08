@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title></title>
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="css/slides-extended.css" />
+    <link rel="stylesheet" href="dist/theme/black-contrast.css" id="theme" />
+    <link rel="stylesheet" href="plugin/highlight/zenburn.css" />
+    <link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+    <link rel="stylesheet" href="plugin/reveal-pointer/pointer.css" />
+
+
+    <script defer src="dist/fontawesome/all.min.js"></script>
+    <script defer src="plugin/load-mathjax.js"></script>
+
+    <script type="text/javascript">
+        function pageInIframe() {
+            return (window.location !== window.parent.location);
+        }
+
+        let forgetPop = true;
+        function onPopState(event) {
+            if(forgetPop){
+                forgetPop = false;
+            } else if( pageInIframe()) {
+                parent.postMessage(event.target.location.href, "app://obsidian.md");
+            }
+        }
+        window.onpopstate = onPopState;
+        window.onmessage = event => {
+            if(event.data == "reload"){
+                window.document.location.reload();
+            }
+            forgetPop = true;
+        }
+
+        function fitElements() {
+            const itemsToFit = document.getElementsByClassName('fitText');
+            for (const item in itemsToFit) {
+                if (Object.hasOwnProperty.call(itemsToFit, item)) {
+                    const element = itemsToFit[item];
+                    fitElement(element, 1, 1000);
+                    element.classList.remove('fitText');
+                }
+            }
+        }
+
+        function fitElement(element, start, end) {
+
+            let size = (end + start) / 2;
+            element.style.fontSize = `${size}px`;
+
+            if (Math.abs(start - end) < 1) {
+                while (element.scrollHeight > element.offsetHeight) {
+                    size--;
+                    element.style.fontSize = `${size}px`;
+                }
+                return;
+            }
+
+            if (element.scrollHeight > element.offsetHeight) {
+                fitElement(element, start, size);
+            } else {
+                fitElement(element, size, end);
+            }
+        }
+
+        document.onreadystatechange = () => {
+            fitElements();
+            if (document.readyState === 'complete') {
+                if (pageInIframe() && window.location.href.indexOf("?export") != -1){
+                    parent.postMessage(event.target.location.href, "app://obsidian.md");
+                }
+                if (window.location.href.indexOf("print-pdf") != -1){
+                    let stateCheck = setInterval(() => {
+                        clearInterval(stateCheck);
+                        window.print();
+                    }, 250);
+                }
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+# Dubbing Studio Induction: 5.1 Surround Sound 🔊
+
+**Presenter: Elias Vasiloudes Nikolaides**
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+# 5.1 Dubbing Studio Induction
+
+## Surround Sound Lab
+
+**Elias Vasiloudes Nikolaides**
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+## Session Objectives 🎯
+
+<!-- Slide 2: Set a welcoming and clear tone. This shows you are structured and student-focused. -->
+
+The goal of this induction is to ensure you can work confidently and safely in this studio. This session will cover how to apply your existing Pro Tools skills to a 5.1 surround sound environment.
+
+We will cover three main topics:
+
+1.  **Professional Standards:** The required deliverable specifications.
+2.  **Technical Workflow:** The first steps for a 5.1 session.
+3.  **Studio Protocol:** How to work safely and maintain the space.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+### Step 0: Professional Standards
+## Understanding Your Deliverables 📄
+
+
+<!-- Slide 3: Start with the professional context. This immediately shows you understand industry standards (like the mentioned Netflix specs), which is a huge plus. -->
+
+Mixing for film or streaming requires adherence to professional standards. Major platforms like Netflix have specific technical requirements for delivery.
+
+A typical specification includes:
+
+-   **Loudness:** A dialogue loudness of **-27 LKFS** (+/- 2 LU) to ensure dialogue clarity and consistency.
+-   **Peak Levels:** A maximum of **-2 dBFS** (true-peak) to prevent distortion.
+-   **Stems:** Separate 5.1 Dialogue, Music, and Effects stems that, when combined, recreate the final mix.
+
+Understanding these final requirements is essential for a successful mix.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+### Step 1: Getting Started
+## Technical Setup & Calibration 🎛️
+
+<!-- Slide 4: Address the practical setup from your notes. This demonstrates technical diligence. The image makes it concrete. -->
+
+Each session must begin with a 3-point check to ensure consistency.
+
+1.  **Interface Check:** Confirm the audio interface is on and set to the correct output for this room.
+2.  **Calibration:** The monitoring level is calibrated to a standard reference, typically **79dB or 82dB SPL**. This ensures your mix will translate accurately to other professional environments.
+3.  **Session Settings:** Double-check that your Pro Tools session's **sample rate** matches the project requirements.
+
+Completing these checks prevents common technical issues. ✅
+
+<img src="workflows/job-applications/job-listings/attachments/Sound Technician (0.5 FTE) - The Glasgow School of Art-1756637872837.webp" alt="" style="width: 300px; object-fit: fill">
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+### Step 2: Studio Protocol
+## Respect the Space & Your Hearing 🤝
+
+<!-- Slide 5: This slide is crucial for showing your personality and alignment with GSA's 'caring' value. You're not just a tech; you're a mentor building a community. -->
+
+This is a shared, professional studio. Please adhere to the following protocols.
+
+**Studio Etiquette:**
+-   If you adjust any monitor settings (e.g., trim, EQ), **reset them to zero** before you leave.
+-   No food or drinks at the console. (excluding water)
+-   When finished, **mute the monitoring system**.
+
+**Hearing Protection: 👂**
+-   Take regular breaks to prevent ear fatigue. A 10-minute break every hour is recommended to maintain accurate mix decisions.
+-   Sudden loud noises can cause hearing damage. **Always know the location of the master volume and the MUTE button.** Before playing audio for the first time, turn the volume down, then bring it up to the desired level slowly.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+### Step 3: Practical Skills
+## Signal Flow in 5.1 ➡️
+
+<!-- Slide 6: This is the core teaching moment from our previous discussion, now in slide format. It's practical and engaging. -->
+
+A common issue is audio not being routed to the correct speaker. The signal flow is as follows:
+
+1.  **The I/O Setup:** In Pro Tools, the **I/O Setup** window defines the signal paths. For surround, you will use a dedicated **5.1 path** that routes audio to all six speakers.
+2.  **Output Assignment:** On each track, select the **"5.1 Out"** bus instead of a stereo output.
+3.  **The Panner:** The track panner is a 2D grid that controls placement.
+
+*(Demonstration)* 🧑‍🏫
+"Using the panner, a sound can be placed in the center channel, or it can be moved from the front-left speaker, through the room, to the back-right speaker."
+
+Your first task is to take a mono audio file and practice panning it around the 5.1 space.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+### Step 4: Common Challenges
+## Speaker Channel Functions 🔈
+
+<!-- Slide 7: Clear, concise information that solves a common beginner problem. Framing it as "speaker jobs" is accessible. -->
+
+Each speaker channel in a 5.1 system has a specific function.
+
+-   **Front (L-C-R):** These channels anchor the sound to the screen. **Dialogue should be placed almost exclusively in the Centre channel** to ground it to the on-screen action.
+
+-   **Surrounds (Ls & Rs):** These channels are for atmosphere and immersion. Use them for reverb, background ambience, and off-screen effects. 🌳
+
+-   **The '.1' (LFE):** This is the **Low-Frequency *Effects*** channel. It is not a general-purpose subwoofer. Use it for specific, impactful low-frequency sounds like explosions or rumbles. Do not route all bass-heavy instruments to it.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+### Step 5: Critical Pitfalls
+## Common Mixing Errors ❌
+
+<!-- Slide 8: This shows foresight and a deeper understanding of the post-production workflow, building on your rough notes. -->
+
+Avoid these two common errors to prevent having to re-export your work:
+
+1.  **Do Not Normalize Stems:** When exporting Dialogue, Music, and Effects stems, do not normalize them individually. Normalization will change their relative levels and destroy the mix balance.
+
+2.  **Maintain Centre Channel Integrity:** Unless for a specific artistic effect (e.g., internal monologue, off-screen radio), primary dialogue should remain in the centre channel. Panning dialogue can be disorienting and reduce intelligibility. 🗣️
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+### Recap 📝
+
+<!-- Slide 9: A quick summary to reinforce the main learning points. -->
+
+Summary of this session:
+
+1.  **Deliverables:** Mix to professional loudness and peak level standards.
+2.  **Setup:** Check the interface, calibration, and sample rate before starting.
+3.  **Safety:** Protect your hearing and follow studio etiquette.
+4.  **Signal Flow:** Use the I/O Setup, 5.1 output, and panner.
+5.  **Speaker Roles:** Understand the function of each channel, especially the Centre and LFE.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: start; justify-content: center" absolute="true">
+
+### Next Steps
+## Advanced Topics 🚀
+
+<!-- Slide 10: This is your 'ambition' section. It shows you have a curriculum in mind and are ready to teach the desirable skills from the job description (Atmos, Ambisonics, Wwise). -->
+
+Future sessions will cover more advanced topics, including:
+
+-   **Immersive Audio Design:** Using surround-specific reverbs and effects.
+-   **Advanced Formats:** An introduction to **Dolby Atmos** and **Ambisonics** for height-based and 360° audio.
+-   **Interactive Audio:** Integrating sound into game engines like **Unity** using **Wwise**, and generative sound with **Max/MSP**. 🎮
+
+
+
+**Questions?**
+</div></script></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script src="plugin/mermaid/mermaid.js"></script>
+    <script src="plugin/chart/chart.umd.js"></script>
+    <script src="plugin/chart/plugin.js"></script>
+    <script src="plugin/menu/menu.js"></script>
+    <script src="plugin/customcontrols/plugin.js"></script>
+    <script src="plugin/reveal-pointer/pointer.js"></script>
+
+    <script>
+        function extend() {
+            const target = {};
+            for (let i = 0; i < arguments.length; i++) {
+                const source = arguments[i];
+                for (const key in source) {
+                    if (source.hasOwnProperty(key)) {
+                        target[key] = source[key];
+                    }
+                }
+            }
+            return target;
+        }
+
+        function isLight(color) {
+            let hex = color.replace('#', '');
+
+            // convert #fff => #ffffff
+            if (hex.length == 3) {
+                hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
+            }
+
+            const c_r = parseInt(hex.substr(0, 2), 16);
+            const c_g = parseInt(hex.substr(2, 2), 16);
+            const c_b = parseInt(hex.substr(4, 2), 16);
+            const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+            return brightness > 155;
+        }
+
+        const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+
+        if (isLight(bgColor)) {
+            document.body.classList.add('has-light-background');
+        } else {
+            document.body.classList.add('has-dark-background');
+        }
+
+        // default options to init reveal.js
+        const defaultOptions = {
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            transition: 'default', // none/fade/slide/convex/concave/zoom
+            plugins: [
+                RevealMarkdown,
+                RevealHighlight,
+                RevealZoom,
+                RevealNotes,
+                RevealMath.MathJax3,
+                RevealMermaid,
+                RevealChart,
+                RevealCustomControls,
+                RevealMenu,
+                RevealPointer,
+            ],
+            allottedTime: 120 * 1000,
+            mathjax3: {
+                mathjax: 'plugin/math/mathjax/tex-chtml-full.js',
+            },
+            markdown: {
+                gfm: true,
+                mangle: false,
+                pedantic: false,
+                smartLists: false,
+                smartypants: false,
+            },
+            mermaid: {
+                theme: isLight(bgColor) ? 'default' : 'dark',
+            },
+            customcontrols: {
+                controls: [
+                    {
+                        id: 'toggle-overview',
+                        title: 'Toggle overview (O)',
+                        icon: '<i class="fa fa-th"></i>',
+                        action: 'Reveal.toggleOverview();'
+                    },
+                ]
+            },
+            menu: {
+                loadIcons: false
+            }
+        };
+
+        if ( pageInIframe() ) {
+            defaultOptions.scrollActivationWidth = 5;
+        }
+
+        // options from URL query string
+        const queryOptions = Reveal().getQueryHash() || {};
+
+        const options = extend(defaultOptions, {"controls":true,"progress":true,"slideNumber":true,"center":false,"transition":"none","transitionSpeed":"normal","width":960,"height":700,"margin":0.04}, queryOptions);
+    </script>
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+    <!-- created with Slides Extended reveal.html template -->
+</body>
+</html>
